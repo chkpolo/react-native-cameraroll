@@ -623,7 +623,7 @@ public class CameraRollModule extends ReactContextBaseJavaModule {
       ContentResolver resolver = mContext.getContentResolver();
 
       // Set up the projection (we only need the ID)
-      String[] projection = { MediaStore.Images.Media._ID };
+      String[] projection = { MediaStore.Video.Media._ID };
 
       // Match on the file path
       String innerWhere = "?";
@@ -631,9 +631,9 @@ public class CameraRollModule extends ReactContextBaseJavaModule {
         innerWhere += ", ?";
       }
 
-      String selection = MediaStore.Images.Media.DATA + " IN (" + innerWhere + ")";
+      String selection = MediaStore.Video.Media.DATA + " IN (" + innerWhere + ")";
       // Query for the ID of the media matching the file path
-      Uri queryUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+      Uri queryUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
 
       String[] selectionArgs = new String[mUris.size()];
       for (int i = 0; i < mUris.size(); i++) {
@@ -645,8 +645,8 @@ public class CameraRollModule extends ReactContextBaseJavaModule {
       int deletedCount = 0;
 
       while (cursor.moveToNext()) {
-        long id = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID));
-        Uri deleteUri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id);
+        long id = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Video.Media._ID));
+        Uri deleteUri = ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, id);
 
         if (resolver.delete(deleteUri, null, null) == 1) {
           deletedCount++;
