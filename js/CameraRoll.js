@@ -141,13 +141,11 @@ class CameraRoll {
     return RNCCameraRoll.deletePhotos(photoUris);
   }
 
-  if(Platform.OS === "android") {
     
    static deleteVideos(photoUris: Array<string>) {
     return RNCCameraRoll.deleteVideos(photoUris);
   }
-  }
-
+ 
   /**
    * Saves the photo or video to the camera roll or photo library.
    *
